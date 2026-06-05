@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turisme i habitatge a les Illes Balears</title>
+
+    <link rel="stylesheet" href="/src/styles.css">
+</head>
+
+<body>
+
+    <header id="header">
+        <div class="header-inner">
+            <p class="eyebrow">Illes Balears · 2006–2025</p>
+            <h1>Quan el turisme transforma l'habitatge</h1>
+            <p class="subtitle">
+                Evolució del valor residencial i la pressió turística
+                als municipis de les Illes Balears
+            </p>
+        </div>
+    </header>
+
+    <main id="dashboard">
+
+        <!-- Lead + xifres clau -->
+        <p id="lead">
+            Entre 2006 i 2025, el valor residencial a les Illes Balears gairebé s'ha
+            <strong>duplicat</strong>. És temptador culpar-ne el turisme. Però, com veurem,
+            les dades expliquen una història més matisada: tot depèn de <em>quin</em> turisme
+            i de <em>quin</em> municipi.
+        </p>
+
+        <section id="key-figures">
+            <div id="kpi-value" class="kpi card">
+                <span class="kpi-label">Valor mitjà residencial</span>
+                <span class="kpi-value">—</span>
+                <span class="kpi-sub"></span>
+            </div>
+            <div id="kpi-change" class="kpi card">
+                <span class="kpi-label">Variació acumulada</span>
+                <span class="kpi-value">—</span>
+                <span class="kpi-sub"></span>
+            </div>
+            <div id="kpi-top" class="kpi card">
+                <span class="kpi-label">Municipi més car</span>
+                <span class="kpi-value">—</span>
+                <span class="kpi-sub"></span>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <section id="controls" class="card toolbar">
+
+            <div class="control-group year-control">
+                <label for="year-slider">Any</label>
+                <button id="play-btn" class="btn btn-icon" aria-label="Reproduir l'evolució temporal">
+                    <span class="play-icon">▶</span>
+                    <span class="play-text">Reproduir</span>
+                </button>
+                <input
+                    type="range"
+                    id="year-slider"
+                    min="2006"
+                    max="2025"
+                    value="2025"
+                >
+                <span id="year-label" class="year-value">2025</span>
+            </div>
+
+            <div class="control-group">
+                <button id="toggle-touristic-btn" class="btn">
+                    Ressaltar municipis turístics
+                </button>
+            </div>
+
+        </section>
+
+        <p id="nav-hint">
+            Mou el control d'<strong>any</strong> o prem <strong>Reproduir</strong> per veure
+            l'evolució. Passa el cursor pels gràfics per als <strong>detalls</strong> i
+            <strong>clica un municipi</strong> al mapa per consultar-ne l'històric complet.
+        </p>
+
+        <!-- Map + info panel -->
+        <section id="main-view">
+
+            <div id="map-container" class="card">
+
+                <div class="card-head">
+                    <h2>On és més car viure?</h2>
+                    <p class="card-sub">Valor mitjà residencial per municipi</p>
+                </div>
+
+                <p class="section-lead">
+                    El preu no segueix la costa hotelera: els tons més intensos es concentren
+                    als enclavaments de la <strong>Serra de Tramuntana</strong> i el sud-oest de
+                    Mallorca. Prem <strong>Reproduir</strong> i veuràs com, any rere any, gairebé
+                    tot el mapa s'enfosqueix.
+                </p>
+
+                <div id="map">
+                    <svg viewBox="0 0 900 450" preserveAspectRatio="xMidYMid meet"></svg>
+                </div>
+
+                <div id="map-legend" class="legend"></div>
+
+            </div>
+
+            <aside id="info-panel" class="card">
+
+                <div class="card-head">
+                    <h2>Detall del municipi</h2>
+                </div>
+
+                <div id="municipality-info" class="empty-state">
+                    Selecciona un municipi al mapa per veure'n l'evolució.
+                </div>
+
+                <div id="linegraph"></div>
+
+            </aside>
+
+        </section>
+
+        <!-- Scatterplot -->
+        <section id="scatter-container" class="card">
+
+            <div class="card-head">
+                <h2>Més turistes, més car? No exactament</h2>
+                <p class="card-sub">
+                    Cada cercle és un municipi · mida segons residents · color segons illa
+                </p>
+            </div>
+
+            <p class="section-lead">
+                Si la pressió turística encarís l'habitatge, els cercles dibuixarien una diagonal
+                ascendent. En canvi formen un <strong>núvol pla</strong>. Els municipis més cars
+                —<strong>Deià</strong> (206.000 €), Valldemossa o Fornalutx— són pobles tranquils
+                de muntanya <em>sense</em> designació turística, mentre que els més saturats
+                —<strong>Sant Llorenç des Cardassar</strong> o <strong>Muro</strong>, amb més de
+                390 pernoctacions per resident a l'any— tenen preus <em>per sota</em> de la mitjana.
+                La correlació entre pernoctacions per resident i preu és pràcticament nul·la.
+            </p>
+
+            <div id="scatterplot"></div>
+
+            <p class="method-note">
+                <strong>Índex compost de pressió turística (0–100)</strong>, calculat per a 2008–2025
+                combinant quatre indicadors normalitzats: pernoctacions per resident (45%),
+                ocupació hotelera (25%), estada mitjana (20%) i ocupació d'apartaments (10%).
+                La població de referència es fixa a 2021; per als anys 2021–2025 el component de
+                pressió coincideix amb l'índex oficial.
+            </p>
+
+        </section>
+
+        <!-- Conclusió -->
+        <section id="conclusion" class="card">
+
+            <div class="card-head">
+                <h2>Què ens diuen les dades</h2>
+            </div>
+
+            <ol class="takeaways">
+                <li>
+                    <strong>L'habitatge s'ha encarit a tot arreu.</strong> El valor residencial
+                    mitjà gairebé s'ha duplicat entre 2006 i 2025 (+87 % a l'arxipèlag), tant als
+                    municipis turístics (+121 %) com als no turístics (+137 %).
+                </li>
+                <li>
+                    <strong>La pressió turística no explica el preu per si sola.</strong> No hi ha
+                    una relació lineal entre pernoctacions per resident i valor: els pobles més cars
+                    són enclavaments exclusius, no els més massificats.
+                </li>
+                <li>
+                    <strong>Conviuen dos models de turisme.</strong> El de masses —hotels, alta
+                    ocupació, preus moderats— i el residencial o d'elit —segones residències,
+                    paisatge, preus alts— pressionen l'habitatge de maneres oposades.
+                </li>
+            </ol>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>
